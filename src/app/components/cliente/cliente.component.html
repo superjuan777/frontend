@@ -1,0 +1,43 @@
+
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>codigo de factura</th>
+                    <th>cliente</th>
+                    <th>ciudad</th>
+                    <th>nit</th>
+                    <th>totalfactura</th>
+                    <th>subtotal</th>
+                    <th>iva</th>
+                    <th>retencion</th>
+                    <th>fechacreacion</th>
+                    <th>estado</th>
+                    <th>pagada</th>
+                    <th>fechapago</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clienteService.clientes">
+                    <td>{{cliente.codigofactura}}</td>
+                    <td>{{cliente.cliente}}</td>
+                    <td>{{cliente.ciudad}}</td>
+                    <td>{{cliente.nit}}</td>
+                    <td>{{cliente.totalfactura}}</td>
+                    <td>{{cliente.subtotal}}</td>
+                    <td>{{cliente.iva}}</td>
+                    <td>{{cliente.retencion}}</td>
+                    <td>{{cliente.fechacreacion}}</td>
+                    <td>{{cliente.estado}}</td>
+                    <td>{{cliente.pagada}}</td>
+                    <td>{{cliente.fechapago}}</td>
+                    <td>
+                        <button mat-raised-button color="primary" (click)="editCliente(cliente)"><span class="material-icons">
+                           wysiwyg
+                          </span></button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
