@@ -29,7 +29,8 @@ export class DialogclienteComponent implements OnInit {
 }
 
   addCliente(form: NgForm){
-    if( form.value.estado === 'Primer Recordatorio'){
+    if(confirm('Estas seguro de enviar correo electronico a cliente y cambiar estado factura')){
+       if( form.value.estado === 'Primer Recordatorio'){
       form.value.estado = 'Segundo Recordatorio';
       this.clienteService.putCliente(form.value).subscribe(
         res => console.log(res),
@@ -88,7 +89,8 @@ export class DialogclienteComponent implements OnInit {
       this.getClientes();
     }
     this.getClientes();
-  }
+   }
+ }
 
   close(){
     this.dialogRef.close();
