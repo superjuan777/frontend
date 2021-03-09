@@ -57,8 +57,9 @@ export class DialogclienteComponent implements OnInit {
       this.close();
       this.getClientes();
     }
-    else if ( form.value.estado === 'Usuario Desactivado'){
+    else if ( form.value.estado === 'Usuario Desactivado' && form.value.pagada === 'False'){
       form.value.estado = 'Usuario Activo';
+      form.value.pagada = 'True';
       this.clienteService.putCliente(form.value).subscribe(
         res => console.log(res),
         err => console.error(err),
@@ -71,8 +72,9 @@ export class DialogclienteComponent implements OnInit {
       this.close();
       this.getClientes();
     }
-    else if ( form.value.estado === 'Usuario Activo'){
+    else if ( form.value.estado === 'Usuario Activo' && form.value.pagada === 'True'){
       form.value.estado = 'Primer Recordatorio';
+      form.value.pagada = 'False';
       this.clienteService.putCliente(form.value).subscribe(
         res => console.log(res),
         err => console.error(err),
