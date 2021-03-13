@@ -127,6 +127,17 @@
                     placeholder="fechapago"
                     [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago}}</item>
                 </div >
+                  
+                   <div class="form-group">
+                    <label for="start">Correo electronico cliente</label>
+                    <item
+                    type="text"
+                    name="email"
+                    class="form-control"
+                    placeholder="Correo electronico cliente"
+                    [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
+                </div >
+                  
                 <button class="btn btn-success" >enviar correo electronico </button>
                 </form>
             </span>
