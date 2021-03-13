@@ -36,6 +36,10 @@ export class DialogclienteComponent implements OnInit {
         res => console.log(res),
         err => console.error(err),
       );
+       this.clienteService.createCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err)
+       );
       this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar ', 'Cerrar', {
         duration: 10000,
         horizontalPosition: 'center',
@@ -50,6 +54,10 @@ export class DialogclienteComponent implements OnInit {
         res => console.log(res),
         err => console.error(err),
       );
+      this.clienteService.createCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err)
+        );
       this.snackBar.open('Correo electronico enviado informando al usuario que sera Desactivada su cuenta por favor cancelar ', 'Cerrar', {
         duration: 10000,
         horizontalPosition: 'center',
@@ -65,6 +73,10 @@ export class DialogclienteComponent implements OnInit {
         res => console.log(res),
         err => console.error(err),
       );
+      this.clienteService.createCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err)
+        );
       this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
         duration: 10000,
         horizontalPosition: 'center',
@@ -80,6 +92,10 @@ export class DialogclienteComponent implements OnInit {
         res => console.log(res),
         err => console.error(err),
       );
+      this.clienteService.createCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err)
+        );
       this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra Primer Recordatorio por favor cancelar ', 'Cerrar', {
         duration: 10000,
         horizontalPosition: 'center',
