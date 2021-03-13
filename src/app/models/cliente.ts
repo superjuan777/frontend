@@ -11,5 +11,6 @@
     retencion: number
     subtotal: number
     totalfactura: number
+    email: string
     Id?: string
 }
