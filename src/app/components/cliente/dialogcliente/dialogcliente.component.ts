@@ -28,85 +28,101 @@ export class DialogclienteComponent implements OnInit {
     );
 }
 
-  addCliente(form: NgForm){
-    if(confirm('Estas seguro de enviar correo electronico a cliente y cambiar estado factura')){
-       if( form.value.estado === 'Primer Recordatorio'){
-      form.value.estado = 'Segundo Recordatorio';
-      this.clienteService.putCliente(form.value).subscribe(
-        res => console.log(res),
-        err => console.error(err),
-      );
-       this.clienteService.createCliente(form.value).subscribe(
-          res => console.log(res),
-          err => console.error(err)
-       );
-      this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar ', 'Cerrar', {
-        duration: 10000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      });
-      this.close();
-      this.getClientes();
+ addCliente(form: NgForm){
+    var menp = " le informamos que el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar";
+    var mens = " le informamos que el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar";
+    var mend = " le informamos que el estado de su cuenta se encuentra en mora y por consiguiente sera Desactivada por favor cancelar";
+    var mena = " le informamos que el estado que su cuenta sera Activada";
 
-    } else if ( form.value.estado === 'Segundo Recordatorio'){
-      form.value.estado = 'Usuario Desactivado';
-      this.clienteService.putCliente(form.value).subscribe(
-        res => console.log(res),
-        err => console.error(err),
-      );
-      this.clienteService.createCliente(form.value).subscribe(
+    var estado = form.value.estado;
+    var pagada = form.value.pagada;
+
+    if(confirm('Estas seguro de enviar correo electronico al cliente y cambiar estado factura')){
+      if(estado === 'Primer Recordatorio'){
+        form.value.estado = 'Segundo Recordatorio';
+        form.value.mensaje = mens;
+        this.clienteService.putCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err),
+        );
+        this.clienteService.createCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err)
         );
-      this.snackBar.open('Correo electronico enviado informando al usuario que sera Desactivada su cuenta por favor cancelar ', 'Cerrar', {
-        duration: 10000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      });
-      this.close();
-      this.getClientes();
-    }
-    else if ( form.value.estado === 'Usuario Desactivado' && form.value.pagada === 'False'){
-      form.value.estado = 'Usuario Activo';
-      form.value.pagada = 'True';
-      this.clienteService.putCliente(form.value).subscribe(
-        res => console.log(res),
-        err => console.error(err),
-      );
-      this.clienteService.createCliente(form.value).subscribe(
+        this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar', 'Cerrar', {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.getClientes();
+        this.close();
+
+
+      } else if (estado === 'Segundo Recordatorio'){
+        form.value.estado = 'Usuario Desactivado';
+        form.value.mensaje = mend;
+        this.clienteService.putCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err),
+        );
+        this.clienteService.createCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err)
         );
-      this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
-        duration: 10000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top'
-      });
-      this.close();
-      this.getClientes();
-    }
-    else if ( form.value.estado === 'Usuario Activo' && form.value.pagada === 'True'){
-      form.value.estado = 'Primer Recordatorio';
-      form.value.pagada = 'False';
-      this.clienteService.putCliente(form.value).subscribe(
-        res => console.log(res),
-        err => console.error(err),
-      );
-      this.clienteService.createCliente(form.value).subscribe(
+        this.snackBar.open('Correo electronico enviado informando al usuario que sera Desactivada su cuenta por favor cancelar', 'Cerrar', {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.getClientes();
+        this.close();
+
+      }
+      else if (estado === 'Usuario Desactivado' && pagada === 'False'){
+        form.value.estado = 'Usuario Activo';
+        form.value.pagada = 'True';
+        form.value.mensaje = mena;
+        this.clienteService.putCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err),
+        );
+        this.clienteService.createCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err)
         );
-      this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra Primer Recordatorio por favor cancelar ', 'Cerrar', {
-        duration: 10000,
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-      });
-      this.close();
+        this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.getClientes();
+        this.close();
+
+      }
+      else if (estado === 'Usuario Activo' && pagada === 'True'){
+        form.value.estado = 'Primer Recordatorio';
+        form.value.pagada = 'False';
+        form.value.mensaje = menp;
+        this.clienteService.putCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err),
+        );
+        this.clienteService.createCliente(form.value).subscribe(
+          res => console.log(res),
+          err => console.error(err)
+        );
+        this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra Primer Recordatorio por favor cancelar', 'Cerrar', {
+          duration: 10000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        this.getClientes();
+        this.close();
+
+      }
       this.getClientes();
     }
-    this.getClientes();
-   }
- }
+  }
 
   close(){
     this.dialogRef.close();
