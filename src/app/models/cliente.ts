@@ -13,4 +13,5 @@
     totalfactura: number
     email: string
     Id?: string
+    mensaje: string
 }
