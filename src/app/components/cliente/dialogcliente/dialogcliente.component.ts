@@ -29,9 +29,9 @@ export class DialogclienteComponent implements OnInit {
 }
 
  addCliente(form: NgForm){
-    var menp = " le informamos que el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar";
-    var mens = " le informamos que el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar";
-    var mend = " le informamos que el estado de su cuenta se encuentra en mora y por consiguiente sera Desactivada por favor cancelar";
+    var menp = " le informamos que el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar por valor de ";
+    var mens = " le informamos que el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar por valor de ";
+    var mend = " le informamos que el estado de su cuenta se encuentra en mora y por consiguiente sera Desactivada por favor cancelar por valor de ";
     var mena = " le informamos que el estado que su cuenta sera Activada";
 
     var estado = form.value.estado;
@@ -82,6 +82,7 @@ export class DialogclienteComponent implements OnInit {
         form.value.estado = 'Usuario Activo';
         form.value.pagada = 'True';
         form.value.mensaje = mena;
+        form.value.totalfactura = null;
         this.clienteService.putCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err),
@@ -103,6 +104,7 @@ export class DialogclienteComponent implements OnInit {
         form.value.estado = 'Primer Recordatorio';
         form.value.pagada = 'False';
         form.value.mensaje = menp;
+        form.value.totalfactura = '$19.278';
         this.clienteService.putCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err),
