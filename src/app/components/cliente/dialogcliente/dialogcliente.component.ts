@@ -32,7 +32,7 @@ export class DialogclienteComponent implements OnInit {
     var menp = " le informamos que el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar por valor de ";
     var mens = " le informamos que el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar por valor de ";
     var mend = " le informamos que el estado de su cuenta se encuentra en mora y por consiguiente sera Desactivada por favor cancelar por valor de ";
-    var mena = " le informamos que el estado que su cuenta sera Activada";
+    var mena = " le informamos que su cuenta sera Activada";
 
     var estado = form.value.estado;
     var pagada = form.value.pagada;
@@ -104,7 +104,7 @@ export class DialogclienteComponent implements OnInit {
         form.value.estado = 'Primer Recordatorio';
         form.value.pagada = 'False';
         form.value.mensaje = menp;
-        form.value.totalfactura = '$19.278';
+        form.value.totalfactura = '19.278';
         this.clienteService.putCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err),
@@ -131,3 +131,4 @@ export class DialogclienteComponent implements OnInit {
   }
 
 }
+
