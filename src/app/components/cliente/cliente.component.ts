@@ -39,8 +39,8 @@ export class ClienteComponent implements OnInit {
 
   openAdd(){
     const dialogRef = this.dialog.open(DialogclienteComponent, {
-      height: '1000px',
-      width: '1000px'
+      height: '87%',
+      width: '65%'
     });
   }
 
