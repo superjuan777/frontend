@@ -82,7 +82,9 @@ export class DialogclienteComponent implements OnInit {
         form.value.estado = 'Usuario Activo';
         form.value.pagada = 'True';
         form.value.mensaje = mena;
-        form.value.totalfactura = null;
+        form.value.totalfactura = "0";
+        form.value.iva = "0";
+        form.value.subtotal = "0";
         this.clienteService.putCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err),
@@ -105,6 +107,8 @@ export class DialogclienteComponent implements OnInit {
         form.value.pagada = 'False';
         form.value.mensaje = menp;
         form.value.totalfactura = '19.278';
+        form.value.iva = "3.078";
+        form.value.subtotal = "16.200";
         this.clienteService.putCliente(form.value).subscribe(
           res => console.log(res),
           err => console.error(err),
@@ -131,4 +135,3 @@ export class DialogclienteComponent implements OnInit {
   }
 
 }
-
