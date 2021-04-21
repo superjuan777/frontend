@@ -49,42 +49,7 @@
                     [(ngModel)]="clienteService.selectedCliente.nit">{{clienteService.selectedCliente.nit}}</item>
                 </div>
 
-                <div class="form-group">
-                    <label for="inputState">Total Factura</label>
-                    <item
-                    type="text"
-                    name="totalfactura"
-                    class="form-control"
-                    placeholder="totalfactura"
-                    [(ngModel)]="clienteService.selectedCliente.totalfactura">{{'$'}} {{clienteService.selectedCliente.totalfactura}}</item>
-                </div>
-                <div class="form-group">
-                    <label for="inputState">Subtotal</label>
-                    <item
-                    type="text"
-                    name="subtotal"
-                    class="form-control"
-                    placeholder="subtotal"
-                    [(ngModel)]="clienteService.selectedCliente.subtotal">{{clienteService.selectedCliente.subtotal}}</item>
-                </div>
-                <div class="form-group">
-                    <label for="inputState">IVA</label>
-                    <item
-                    type="text"
-                    name="iva"
-                    class="form-control"
-                    placeholder="iva"
-                    [(ngModel)]="clienteService.selectedCliente.iva">{{clienteService.selectedCliente.iva}}</item>
-                </div>
-                <div class="form-group">
-                    <label for="inputState">Retencion</label>
-                    <item
-                    type="text"
-                    name="retencion"
-                    class="form-control"
-                    placeholder="retencion"
-                    [(ngModel)]="clienteService.selectedCliente.retencion">{{clienteService.selectedCliente.retencion}}</item>
-                </div>
+
                 <div class="form-group">
                     <label for="inputState">Fecha Creacion</label>
                     <item
@@ -92,7 +57,7 @@
                     name="fechacreacion"
                     class="form-control"
                     placeholder="fechacreacion"
-                    [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion}}</item>
+                    [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion | date: 'short'}}</item>
                 </div>
 
 
@@ -125,9 +90,48 @@
                     name="fechapago"
                     class="form-control"
                     placeholder="fechapago"
-                    [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago}}</item>
+                    [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago | date: 'short'}}</item>
                 </div >
-                  
+
+                <div class="form-group">
+                  <label for="inputState">Subtotal</label>
+                  <item
+                  type="text"
+                  name="subtotal"
+                  class="form-control"
+                  placeholder="subtotal"
+                  [(ngModel)]="clienteService.selectedCliente.subtotal">{{'$'}} {{clienteService.selectedCliente.subtotal}}</item>
+              </div>
+              <div class="form-group">
+                  <label for="inputState">IVA</label>
+                  <item
+                  type="text"
+                  name="iva"
+                  class="form-control"
+                  placeholder="iva"
+                  [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
+              </div>
+
+              <div class="form-group">
+                <label for="inputState">Retencion</label>
+                <item
+                type="text"
+                name="retencion"
+                class="form-control"
+                placeholder="retencion"
+                [(ngModel)]="clienteService.selectedCliente.retencion">{{'$'}} {{clienteService.selectedCliente.retencion}}</item>
+            </div>
+
+              <div class="form-group">
+                <label for="inputState">Total Factura</label>
+                <item
+                type="text"
+                name="totalfactura"
+                class="form-control"
+                placeholder="totalfactura"
+                [(ngModel)]="clienteService.selectedCliente.totalfactura">{{'$'}} {{clienteService.selectedCliente.totalfactura}}</item>
+            </div>
+
                    <div class="form-group">
                     <label for="start">Correo electronico cliente</label>
                     <item
@@ -137,7 +141,7 @@
                     placeholder="Correo electronico cliente"
                     [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
                 </div >
-                  
+
                 <button class="btn btn-success" >enviar correo electronico </button>
                 </form>
             </span>
@@ -147,6 +151,4 @@
     <mat-dialog-actions align="end">
       <button mat-raised-button color="primary"  (click)="close()">cerrar</button>
     </mat-dialog-actions>
-
-
 
