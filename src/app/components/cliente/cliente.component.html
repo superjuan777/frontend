@@ -1,5 +1,4 @@
-
-    <div class="col-md-12">
+  <div class="col-md-12">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -27,10 +26,10 @@
                     <td>{{'$'}}{{cliente.subtotal}}</td>
                     <td>{{'$'}}{{cliente.iva}}</td>
                     <td>{{cliente.retencion}}</td>
-                    <td>{{cliente.fechacreacion}}</td>
+                    <td>{{cliente.fechacreacion | date: 'short'}}</td>
                     <td>{{cliente.estado}}</td>
                     <td>{{cliente.pagada}}</td>
-                    <td>{{cliente.fechapago}}</td>
+                    <td>{{cliente.fechapago | date: 'short'}}</td>
                     <td>
                         <button mat-raised-button color="primary" (click)="editCliente(cliente)"><span class="material-icons">
                            wysiwyg
@@ -41,3 +40,4 @@
             </tbody>
         </table>
     </div>
+
