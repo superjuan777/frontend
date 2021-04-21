@@ -79,6 +79,7 @@ export class DialogclienteComponent implements OnInit {
 
       }
       else if (estado === 'Usuario Desactivado' && pagada === 'False'){
+        form.value.fechapago = new Date();
         form.value.estado = 'Usuario Activo';
         form.value.pagada = 'True';
         form.value.mensaje = mena;
