@@ -17,7 +17,7 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
 
   activado = true;
 
-  por = 50;
+  por = 19;
 
   suscription: Subscription;
 
@@ -157,7 +157,7 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           sub = tot - iva;
           tot = iva + sub;
           if(tot === 0){
-            tot = 100;
+            tot = 19550;
           }
           form.value.totalfactura = tot;
           form.value.iva = iva;
