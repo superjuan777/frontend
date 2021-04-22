@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Cliente } from '../models/cliente';
+import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
+
+  private _refresh$ = new Subject<void>();
 
   URL_API = 'https://localhost:44313/books'
 
@@ -31,6 +35,10 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
+  get refresh$(){
+    return this._refresh$;
+  }
+
   getClientes(){
     return this.http.get<Cliente[]>(this.URL_API);
   }
@@ -38,9 +46,14 @@ export class ClienteService {
   putCliente(cliente: Cliente){
     return this.http.put(`${this.URL_API}/${cliente.Id}`, cliente);
   }
-  
+
   createCliente(cliente: Cliente){
-    return this.http.post(this.URL_API, cliente);
+    return this.http.post(this.URL_API, cliente)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+      )
   }
 
 }
