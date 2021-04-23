@@ -14,4 +14,5 @@
     email: string
     Id?: string
     mensaje: string
+    por: number
 }
