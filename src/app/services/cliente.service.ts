@@ -29,6 +29,7 @@ export class ClienteService {
     totalfactura: 0,
     email: "",
     mensaje: "",
+    por: 0,
   }
 
   clientes : Cliente[];
