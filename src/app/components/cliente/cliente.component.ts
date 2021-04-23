@@ -51,7 +51,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
 
   openAdd(){
     const dialogRef = this.dialog.open(DialogclienteComponent, {
-      height: '87%',
+      height: '89%',
       width: '65%'
     });
   }
