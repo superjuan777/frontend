@@ -1,3 +1,6 @@
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary"  (click)="close()">x</button>
+</mat-dialog-actions>
 <h1 mat-dialog-title  align="center">Cliente {{clienteService.selectedCliente.cliente}} estado factura {{clienteService.selectedCliente.estado}}</h1>
 <div mat-dialog-content>
     <div class="card">
@@ -6,160 +9,170 @@
                 <form #clienteForm="ngForm" (ngSubmit)="addCliente(clienteForm)">
                     <input type="hidden" name="Id" [(ngModel)]="clienteService.selectedCliente.Id">
 
-                    <div class="form-group">
-                        <label for="inputState">Codigo de Factura</label>
-                        <item
-                        id="inputState"
-                        type="text"
-                        name="codigofactura"
-                        class="form-control"
-                        [(ngModel)]="clienteService.selectedCliente.codigofactura">{{clienteService.selectedCliente.codigofactura}}</item>
+                    <div class="input-100">
+                      <label for="inputState">Codigo de Factura</label>
+                      <item
+                      id="inputState"
+                      type="text"
+                      name="codigofactura"
+                      class="form-control"
+                      [(ngModel)]="clienteService.selectedCliente.codigofactura">{{clienteService.selectedCliente.codigofactura}}</item>
+                    </div>
+
+                    <div class="input-100">
+                      <label for="inputState">Cliente</label>
+                      <item
+                      id="inputState"
+                      type="text"
+                      name="cliente"
+                      class="form-control"
+                      [(ngModel)]="clienteService.selectedCliente.cliente">{{clienteService.selectedCliente.cliente}}</item>
+                    </div>
+
+                    <div class="input-100">
+                      <label for="inputState">NIT</label>
+                      <item
+                      type="text"
+                      name="nit"
+                      class="form-control"
+                      placeholder="nit"
+                      [(ngModel)]="clienteService.selectedCliente.nit">{{clienteService.selectedCliente.nit}}</item>
+                     </div>
+
+                    <div class="input-100">
+                      <label for="inputState">Ciudad</label>
+                       <item
+                      id="inputState"
+                      type="text"
+                      name="ciudad"
+                      class="form-control"
+                      placeholder="ciudad"
+                      [(ngModel)]="clienteService.selectedCliente.ciudad">{{clienteService.selectedCliente.ciudad}}</item>
+
+                    </div>
+
+                     <div class="input-100">
+                      <label for="inputState">Fecha Creacion</label>
+                      <item
+                      type="text"
+                      name="fechacreacion"
+                      class="form-control"
+                      placeholder="fechacreacion"
+                      [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion | date: 'short'}}</item>
+                     </div>
+
+                     <div class="input-100">
+                      <label for="inputState">Estado</label>
+                      <item
+                      class="form-control"
+                      type="text"
+                      name="estado"
+                      class="form-control"
+                      [(ngModel)]="clienteService.selectedCliente.estado">{{clienteService.selectedCliente.estado}}</item>
+                     </div>
+
+                     <div class="input-100">
+                      <label for="inputState">Pagada</label>
+                      <item
+                      id="inputState"
+                      type="text"
+                      name="pagada"
+                      class="form-control"
+                      [(ngModel)]="clienteService.selectedCliente.pagada">{{clienteService.selectedCliente.pagada}}</item>
+                     </div>
+
+                     <div class="input-48">
+                      <label for="start">Fecha de Pago</label>
+                      <item
+                      type="date"
+                      name="fechapago"
+                      class="form-control"
+                      placeholder="fechapago"
+                      [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago | date: 'short'}}</item>
+                     </div >
+
+                     <div class="input-48">
+                      <label for="inputState">Subtotal</label>
+                      <item
+                      type="text"
+                      name="subtotal"
+                      class="form-control"
+                      placeholder="subtotal"
+                      [(ngModel)]="clienteService.selectedCliente.subtotal">{{'$'}} {{clienteService.selectedCliente.subtotal}}</item>
+                     </div>
+
+                     <div class="input-48">
+                      <label for="inputState">IVA</label>
+                      <item
+                      type="text"
+                      name="iva"
+                      class="form-control"
+                      placeholder="iva"
+                      [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
+                     </div>
+
+                     <div *ngIf="!activado" class="input-48">
+                      <label for="inputState">%</label>
+                      <input
+                      type="number"
+                      name="por"
+                      class="form-control"
+                      placeholder="%"
+                      [(ngModel)]="clienteService.selectedCliente.por"/>
                       </div>
 
-                      <div class="form-group">
-                        <label for="inputState">Cliente</label>
-                        <item
-                        id="inputState"
-                        type="text"
-                        name="cliente"
-                        class="form-control"
-                        [(ngModel)]="clienteService.selectedCliente.cliente">{{clienteService.selectedCliente.cliente}}</item>
-                      </div>
+                     <div *ngIf="activado" class="input-48">
+                      <label for="inputState">%</label>
+                      <item
+                      name="por"
+                      class="form-control"
+                     [(ngModel)]="clienteService.selectedCliente.por">{{clienteService.selectedCliente.por}}{{'%'}}</item>
+                     </div>
 
-                      <div class="form-group">
-                        <label for="inputState">Ciudad</label>
-                         <item
-                        id="inputState"
-                        type="text"
-                        name="ciudad"
-                        class="form-control"
-                        placeholder="ciudad"
-                        [(ngModel)]="clienteService.selectedCliente.ciudad">{{clienteService.selectedCliente.ciudad}}</item>
+                     <div class="input-48">
+                      <label for="inputState">Retencion</label>
+                      <item
+                      type="text"
+                      name="retencion"
+                      class="form-control"
+                      placeholder="retencion"
+                      [(ngModel)]="clienteService.selectedCliente.retencion">{{'$'}} {{clienteService.selectedCliente.retencion}}</item>
+                    </div>
 
-                      </div>
+                    <div *ngIf="activado" class="input-100">
+                      <label for="inputState">Total Factura</label>
+                      <item
+                      type="text"
+                      name="totalfactura"
+                      class="form-control"
+                      placeholder="totalfactura"
+                      [(ngModel)]="clienteService.selectedCliente.totalfactura">{{'$'}} {{clienteService.selectedCliente.totalfactura}}</item>
+                    </div>
 
+                    <div *ngIf="!activado" class="input-100">
+                      <label for="inputState">Total Factura</label>
+                      <input
+                      type="number"
+                      name="totalfactura"
+                      class="form-control"
+                      placeholder="totalfactura"
+                      [(ngModel)]="clienteService.selectedCliente.totalfactura"/>
+                     </div>
 
-                <div class="form-group">
-                    <label for="inputState">NIT</label>
-                    <item
-                    type="text"
-                    name="nit"
-                    class="form-control"
-                    placeholder="nit"
-                    [(ngModel)]="clienteService.selectedCliente.nit">{{clienteService.selectedCliente.nit}}</item>
-                </div>
+                     <div class="input-48">
+                      <label for="start">Correo electronico cliente</label>
+                      <item
+                      type="text"
+                      name="email"
+                      class="form-control"
+                      placeholder="Correo electronico cliente"
+                      [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
+                     </div >
 
-
-                <div class="form-group">
-                    <label for="inputState">Fecha Creacion</label>
-                    <item
-                    type="text"
-                    name="fechacreacion"
-                    class="form-control"
-                    placeholder="fechacreacion"
-                    [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion | date: 'short'}}</item>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="inputState">Estado</label>
-                    <item
-                    class="form-control"
-                    type="text"
-                    name="estado"
-                    class="form-control"
-                    [(ngModel)]="clienteService.selectedCliente.estado">{{clienteService.selectedCliente.estado}}</item>
-                  </div>
-
-
-                  <div class="form-group">
-                    <label for="inputState">Pagada</label>
-                    <item
-                    id="inputState"
-                    type="text"
-                    name="pagada"
-                    class="form-control"
-                    [(ngModel)]="clienteService.selectedCliente.pagada">{{clienteService.selectedCliente.pagada}}</item>
-                  </div>
-
-
-                <div class="form-group">
-                    <label for="start">Fecha de Pago</label>
-                    <item
-                    type="date"
-                    name="fechapago"
-                    class="form-control"
-                    placeholder="fechapago"
-                    [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago | date: 'short'}}</item>
-                </div >
-
-                <div class="form-group">
-                  <label for="inputState">Subtotal</label>
-                  <item
-                  type="text"
-                  name="subtotal"
-                  class="form-control"
-                  placeholder="subtotal"
-                  [(ngModel)]="clienteService.selectedCliente.subtotal">{{'$'}} {{clienteService.selectedCliente.subtotal}}</item>
-              </div>
-
-              <div class="form-group">
-                  <label for="inputState">IVA</label>
-                  <item
-                  type="text"
-                  name="iva"
-                  class="form-control"
-                  placeholder="iva"
-                  [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
-              </div>
-
-              <div class="form-group">
-                <label for="inputState">Retencion</label>
-                <item
-                type="text"
-                name="retencion"
-                class="form-control"
-                placeholder="retencion"
-                [(ngModel)]="clienteService.selectedCliente.retencion">{{'$'}} {{clienteService.selectedCliente.retencion}}</item>
-            </div>
-
-             <div *ngIf="activado" class="form-group">
-              <label for="inputState">Total Factura</label>
-              <item
-              type="text"
-              name="totalfactura"
-              class="form-control"
-              placeholder="totalfactura"
-              [(ngModel)]="clienteService.selectedCliente.totalfactura">{{'$'}} {{clienteService.selectedCliente.totalfactura}}</item>
-              </div>
-
-                <div *ngIf="!activado" class="form-group">
-                <label for="inputState">Total Factura</label>
-                <input
-                type="number"
-                name="totalfactura"
-                class="form-control"
-                placeholder="totalfactura"
-                [(ngModel)]="clienteService.selectedCliente.totalfactura"/>
-               </div>
-
-                   <div class="form-group">
-                    <label for="start">Correo electronico cliente</label>
-                    <item
-                    type="text"
-                    name="email"
-                    class="form-control"
-                    placeholder="Correo electronico cliente"
-                    [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
-                </div >
-
-                <button class="btn btn-success" >enviar correo electronico </button>
+                <button class="boton" >enviar correo electronico </button>
+                <button class="boton1" (click)="pago(clienteForm)" >Factura Pagada </button>
                 </form>
             </span>
         </div>
     </div>
   </div>
-    <mat-dialog-actions align="end">
-      <button mat-raised-button color="primary"  (click)="close()">cerrar</button>
-    </mat-dialog-actions>
-
