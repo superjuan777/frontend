@@ -1,35 +1,48 @@
+.form__titulo {
+  background: deepskyblue;
+  color: rgb(2, 2, 2);
+  padding: 10px;
+  text-align: center;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom: 5px solid crimson;
+}
+
 .input-48 {
-  width: 48%
-}
-
-.input-100 {
-  width: 100%;
-  text-align: center
-}
-
-.boton {
-  background-color: #e02a3a;
-align-content: center;
-border-bottom-right-radius: 7px;
-border-bottom-left-radius: 7px;
-border-top-left-radius: 7px;
-border-top-right-radius: 7px;
-font-weight: 100;
-padding: 10px 19px;
-color: #030303;
-font-size: 16px;
-}
-
-.boton1 {
-  background-color: #28d41dde;
-  align-content: end;
-  float: right;
+  text-align: end;
+  width: 30%;
+  font-size: 10px;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  font-weight: 100;
-  padding: 10px 19px;
-  color: #030303;
-  font-size: 16px;
+}
+
+.input-100 {
+  width: 100%;
+  font-size: 10px;
+  text-align: center;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+input {
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+item {
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+
+.boton {
+  align-content: end;
 }
