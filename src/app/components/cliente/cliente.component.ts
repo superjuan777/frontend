@@ -54,6 +54,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
       height: '89%',
       width: '65%'
     });
+    this.getClientes();
   }
 
 }
