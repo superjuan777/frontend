@@ -1,7 +1,4 @@
-<mat-dialog-actions align="end">
-  <button mat-raised-button color="primary"  (click)="close()">x</button>
-</mat-dialog-actions>
-<h1 mat-dialog-title  align="center">Cliente {{clienteService.selectedCliente.cliente}} estado factura {{clienteService.selectedCliente.estado}}</h1>
+<h1 mat-dialog-title class="form__titulo" align="center">Cliente {{clienteService.selectedCliente.cliente}} estado factura {{clienteService.selectedCliente.estado}}</h1>
 <div mat-dialog-content>
     <div class="card">
         <div class="card-body" >
@@ -58,7 +55,7 @@
                       name="fechacreacion"
                       class="form-control"
                       placeholder="fechacreacion"
-                      [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion | date: 'short'}}</item>
+                      [(ngModel)]="clienteService.selectedCliente.fechacreacion">{{clienteService.selectedCliente.fechacreacion | date: 'medium'}}</item>
                      </div>
 
                      <div class="input-100">
@@ -88,7 +85,7 @@
                       name="fechapago"
                       class="form-control"
                       placeholder="fechapago"
-                      [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago | date: 'short'}}</item>
+                      [(ngModel)]="clienteService.selectedCliente.fechapago">{{clienteService.selectedCliente.fechapago | date: 'medium'}}</item>
                      </div >
 
                      <div class="input-48">
@@ -109,25 +106,27 @@
                       class="form-control"
                       placeholder="iva"
                       [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
-                     </div>
 
-                     <div *ngIf="!activado" class="input-48">
-                      <label for="inputState">Porcentaje</label>
-                      <input
-                      type="number"
-                      name="por"
-                      class="form-control"
-                      placeholder="Porcentaje %"
-                      [(ngModel)]="clienteService.selectedCliente.por"/>
-                      </div>
+                       <div *ngIf="!activado" align="end" >
+                        <label for="inputState">Porcentaje</label>
+                        <input
+                        type="number"
+                        name="por"
+                        class="form-control"
+                        placeholder="Porcentaje %"
+                        [(ngModel)]="clienteService.selectedCliente.por"/>
+                        </div>
 
-                     <div *ngIf="activado" class="input-48">
-                      <label for="inputState">Porcentaje</label>
-                      <item
-                      name="por"
-                      class="form-control"
-                     [(ngModel)]="clienteService.selectedCliente.por">{{clienteService.selectedCliente.por}}{{'%'}}</item>
-                     </div>
+                       <div *ngIf="activado" align="end">
+                        <label for="inputState">Porcentaje</label>
+                        <item
+                        name="por"
+                        class="form-control"
+                       [(ngModel)]="clienteService.selectedCliente.por">{{clienteService.selectedCliente.por}}{{'%'}}</item>
+                       </div>
+                    </div>
+
+
 
                      <div class="input-48">
                       <label for="inputState">Retencion</label>
@@ -156,6 +155,7 @@
                       name="totalfactura"
                       class="form-control"
                       placeholder="totalfactura"
+                      required
                       [(ngModel)]="clienteService.selectedCliente.totalfactura"/>
                      </div>
 
@@ -169,8 +169,12 @@
                       [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
                      </div >
 
-                <button class="boton" >enviar correo electronico </button>
-                <button class="boton1" (click)="pago(clienteForm)" >Factura Pagada </button>
+                    <mat-dialog-actions >
+                      <button mat-raised-button color="primary" >enviar correo electronico</button>
+                      <button mat-raised-button class="boton" align="end" color="warn" (click)="pago(clienteForm)">Factura Pagada</button>
+                    </mat-dialog-actions>
+
+
                 </form>
             </span>
         </div>
