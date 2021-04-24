@@ -46,3 +46,12 @@ item {
 .boton {
   margin-left: 200px !important;
 }
+
+label {
+  color: aqua !important;
+  font-size: 17px !important;
+}
+
+.inli {
+  display: inline  !important;
+}
