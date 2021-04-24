@@ -107,7 +107,7 @@
                       placeholder="iva"
                       [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
 
-                       <div *ngIf="!activado" align="end" >
+                       <div *ngIf="!activado" class="inli" align="end" >
                         <label for="inputState">Porcentaje</label>
                         <input
                         type="number"
@@ -117,7 +117,7 @@
                         [(ngModel)]="clienteService.selectedCliente.por"/>
                         </div>
 
-                       <div *ngIf="activado" align="end">
+                       <div *ngIf="activado" class="inli" align="end">
                         <label for="inputState">Porcentaje</label>
                         <item
                         name="por"
