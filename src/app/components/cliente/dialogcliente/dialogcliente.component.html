@@ -4,17 +4,17 @@
         <div class="card-body" >
             <span class="border border-primary">
                 <form #clienteForm="ngForm" (ngSubmit)="addCliente(clienteForm)">
-                    <input type="hidden" name="Id" [(ngModel)]="clienteService.selectedCliente.Id">
+                  <input type="hidden" name="Id" [(ngModel)]="clienteService.selectedCliente.Id">
 
-                    <div class="input-100">
-                      <label for="inputState">Codigo de Factura</label>
-                      <item
-                      id="inputState"
-                      type="text"
-                      name="codigofactura"
-                      class="form-control"
-                      [(ngModel)]="clienteService.selectedCliente.codigofactura">{{clienteService.selectedCliente.codigofactura}}</item>
-                    </div>
+                  <div class="input-100">
+                    <label for="codigofactura">Codigo de Factura</label>
+                    <item
+                    id="codigofactura"
+                    type="text"
+                    name="codigofactura"
+                    class="form-control"
+                    [(ngModel)]="clienteService.selectedCliente.codigofactura">{{clienteService.selectedCliente.codigofactura}}</item>
+                  </div>
 
                     <div class="input-100">
                       <label for="inputState">Cliente</label>
@@ -99,7 +99,7 @@
                      </div>
 
                      <div class="input-48">
-                      <label for="inputState">IVA</label>
+                      <label for="iva">IVA</label>
                       <item
                       type="text"
                       name="iva"
@@ -107,8 +107,8 @@
                       placeholder="iva"
                       [(ngModel)]="clienteService.selectedCliente.iva">{{'$'}} {{clienteService.selectedCliente.iva}}</item>
 
-                       <div *ngIf="!activado" class="inli" align="end" >
-                        <label for="inputState">Porcentaje</label>
+                       <div *ngIf="!activado" class="line" align="end" >
+                        <label for="por">Porcentaje</label>
                         <input
                         type="number"
                         name="por"
@@ -117,7 +117,7 @@
                         [(ngModel)]="clienteService.selectedCliente.por"/>
                         </div>
 
-                       <div *ngIf="activado" class="inli" align="end">
+                       <div *ngIf="activado" class="line" align="end">
                         <label for="inputState">Porcentaje</label>
                         <item
                         name="por"
@@ -129,7 +129,7 @@
 
 
                      <div class="input-48">
-                      <label for="inputState">Retencion</label>
+                      <label for="retencion">Retencion</label>
                       <item
                       type="text"
                       name="retencion"
@@ -139,7 +139,7 @@
                     </div>
 
                     <div *ngIf="activado" class="input-100">
-                      <label for="inputState">Total Factura</label>
+                      <label for="totalfactura">Total Factura</label>
                       <item
                       type="text"
                       name="totalfactura"
@@ -149,18 +149,24 @@
                     </div>
 
                     <div *ngIf="!activado" class="input-100">
-                      <label for="inputState">Total Factura</label>
+                      <label for="totalfactura">Total Factura</label>
                       <input
+                      required minlength="1"
                       type="number"
                       name="totalfactura"
+                      #totalfactura="ngModel"
                       class="form-control"
                       placeholder="totalfactura"
-                      required
-                      [(ngModel)]="clienteService.selectedCliente.totalfactura"/>
-                     </div>
+                      [(ngModel)]="clienteService.selectedCliente.totalfactura">
+
+                      <div class="alert" *ngIf="totalfactura.touched && !totalfactura.valid">
+                      <div *ngIf="totalfactura.errors.required">Total factura requiere un valor</div>
+                      <div *ngIf="totalfactura.errors.minlength"> debe ingresar un valor en Total factura mayor que cero</div>
+                      </div>
+                    </div>
 
                      <div class="input-48">
-                      <label for="start">Correo electronico cliente</label>
+                      <label for="email">Correo electronico cliente</label>
                       <item
                       type="text"
                       name="email"
@@ -168,6 +174,8 @@
                       placeholder="Correo electronico cliente"
                       [(ngModel)]="clienteService.selectedCliente.email">{{clienteService.selectedCliente.email}}</item>
                      </div >
+
+
 
                     <mat-dialog-actions >
                       <button mat-raised-button color="primary" >enviar correo electronico</button>
