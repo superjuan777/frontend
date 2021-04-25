@@ -46,7 +46,7 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
 
 
    pago(form: NgForm){
-    if(confirm('Estas que la factura esta pagada ')){
+    if(confirm('Estas seguro que la factura esta pagada')){
       form.value.fechapago = new Date();
      form.value.estado = 'Usuario Activo';
      form.value.pagada = 'True';
