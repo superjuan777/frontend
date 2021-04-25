@@ -104,7 +104,7 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
     var tot = 0;
 
 
-    if(form.value.totalfactura === 0){
+    if(form.value.totalfactura === 0 || form.value.totalfactura === null){
       this.snackBar.open('El valor de total de la factura debe ser mayor que cero para enviar correo', 'Cerrar', {
         duration: 10000,
         horizontalPosition: 'center',
