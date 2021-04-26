@@ -22,10 +22,10 @@
                     <td>{{cliente.cliente}}</td>
                     <td>{{cliente.ciudad}}</td>
                     <td>{{cliente.nit}}</td>
-                    <td>{{'$'}}{{cliente.totalfactura}}</td>
-                    <td>{{'$'}}{{cliente.subtotal}}</td>
-                    <td>{{'$'}}{{cliente.iva}}</td>
-                    <td>{{'$'}}{{cliente.retencion}}</td>
+                    <td>{{cliente.totalfactura/1000 | currency:'USD':true:'1.3-3'}}</td>
+                    <td>{{cliente.subtotal/1000 | currency:'USD':true:'1.3-3'}}</td>
+                    <td>{{cliente.iva/1000 | currency:'USD':true:'1.3-3'}}</td>
+                    <td>{{cliente.retencion/1000 | currency:'USD':true:'1.3-3'}}</td>
                     <td>{{cliente.fechacreacion | date: 'medium'}}</td>
                     <td>{{cliente.estado}}</td>
                     <td>{{cliente.pagada}}</td>
