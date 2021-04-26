@@ -4,7 +4,7 @@ import { NgForm} from '@angular/forms'
 import { Cliente } from 'src/app/models/cliente';
 import { DialogclienteComponent } from './dialogcliente/dialogcliente.component';
 import {MatDialog} from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -28,6 +28,8 @@ export class ClienteComponent implements OnInit, OnDestroy {
     })
   }
 
+
+
   ngOnDestroy() {
     this.suscription.unsubscribe();
   }
@@ -46,6 +48,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
   editCliente(cliente: Cliente){
     this.openAdd();
     this.clienteService.selectedCliente = cliente;
+    this.getClientes();
   }
 
 
@@ -54,7 +57,6 @@ export class ClienteComponent implements OnInit, OnDestroy {
       height: '89%',
       width: '65%'
     });
-    this.getClientes();
   }
 
 }

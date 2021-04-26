@@ -45,7 +45,12 @@ export class ClienteService {
   }
 
   putCliente(cliente: Cliente){
-    return this.http.put(`${this.URL_API}/${cliente.Id}`, cliente);
+    return this.http.put(`${this.URL_API}/${cliente.Id}`, cliente)
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+      )
   }
 
   createCliente(cliente: Cliente){

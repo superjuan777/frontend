@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { ClienteService } from 'src/app/services/cliente.service';
 export class DialogclienteComponent implements OnInit, OnDestroy {
 
 
+
    activado = true;
 
    suscription: Subscription;
@@ -24,6 +25,7 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
               public snackBar: MatSnackBar) {  }
 
    ngOnInit(): void {
+    this.getClientes();
 
     this.suscription = this.clienteService.refresh$.subscribe(() => {
       this.getClientes();
@@ -207,15 +209,15 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           this.close();
 
         }
-        this.getClientes();
       }
     }
 
 
    }
-
    close(){
     this.dialogRef.close();
+    this.getClientes();
    }
+
 
 }
