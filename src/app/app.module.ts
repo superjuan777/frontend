@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { DialogclienteComponent } from './components/cliente/dialogcliente/dialogcliente.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReservedPipe } from './reserved.pipe';
 
 
 
@@ -21,7 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     ClienteComponent,
-    DialogclienteComponent
+    DialogclienteComponent,
+    ReservedPipe
 
   ],
   imports: [
