@@ -7,7 +7,7 @@
     fechapago: number
     iva: number
     nit: number
-    pagada: string
+    pagada: boolean
     retencion: number
     subtotal: number
     totalfactura: number

@@ -23,7 +23,7 @@ export class ClienteService {
     fechapago: 0,
     iva: 0,
     nit: 0,
-    pagada: "",
+    pagada: true,
     retencion: 0,
     subtotal: 0,
     totalfactura: 0,
@@ -52,14 +52,4 @@ export class ClienteService {
       })
       )
   }
-
-  createCliente(cliente: Cliente){
-    return this.http.post(this.URL_API, cliente)
-    .pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-      )
-  }
-
 }

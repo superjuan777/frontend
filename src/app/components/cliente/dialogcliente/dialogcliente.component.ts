@@ -49,9 +49,9 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
 
    pago(form: NgForm){
     if(confirm('Estas seguro que la factura esta pagada')){
-      form.value.fechapago = new Date();
+     form.value.fechapago = new Date();
      form.value.estado = 'Usuario Activo';
-     form.value.pagada = 'True';
+     form.value.pagada = true;
      form.value.mensaje = " le informamos que su cuenta fue Activada"
      form.value.totalfactura = 0;
      form.value.iva = 0;
@@ -59,10 +59,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
      this.clienteService.putCliente(form.value).subscribe(
       res => console.log(res),
       err => console.error(err),
-     );
-     this.clienteService.createCliente(form.value).subscribe(
-      res => console.log(res),
-      err => console.error(err)
      );
      this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
       duration: 10000,
@@ -75,26 +71,19 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
    }
 
 
-   addCliente(form: NgForm){
+    addCliente(form: NgForm){
     const cero = 0;
     const cien = 100;
 
-      if(form.value.pagada === 'True'){
+      if(form.value.pagada === true){
         this.activado = false;
       } else {
         this.activado = true;
       }
 
-      tot = form.value.totalfactura;
-          iva = (tot * por)/cien;
-          sub = tot - iva;
-          tot = iva + sub;
-
-
     var menp = " le informamos que el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar por valor de ";
     var mens = " le informamos que el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar por valor de ";
     var mend = " le informamos que el estado de su cuenta se encuentra en mora y por consiguiente sera Desactivada por favor cancelar por valor de ";
-    var mena = " le informamos que su cuenta fue Activada";
 
     var estado = form.value.estado;
     var pagada = form.value.pagada;
@@ -121,10 +110,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
             res => console.log(res),
             err => console.error(err),
           );
-          this.clienteService.createCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err)
-          );
           this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar', 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'center',
@@ -133,54 +118,25 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           this.getClientes();
           this.close();
 
-
         } else if (estado === 'Segundo Recordatorio'){
-          form.value.estado = 'Usuario Desactivado';
-          form.value.mensaje = mend;
-          this.clienteService.putCliente(form.value).subscribe(
+            form.value.estado = 'Usuario Desactivado';
+            form.value.mensaje = mend;
+            this.clienteService.putCliente(form.value).subscribe(
             res => console.log(res),
             err => console.error(err),
-          );
-          this.clienteService.createCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err)
-          );
-          this.snackBar.open('Correo electronico enviado informando al usuario que sera Desactivada su cuenta por favor cancelar', 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
-          this.getClientes();
-          this.close();
-
-        }
-        else if (estado === 'Usuario Desactivado' && pagada === 'False'){
-          form.value.fechapago = new Date();
-          form.value.estado = 'Usuario Activo';
-          form.value.pagada = 'True';
-          form.value.mensaje = mena;
-          form.value.totalfactura = cero;
-          form.value.iva = cero;
-          form.value.subtotal = cero;
-          this.clienteService.putCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err),
-          );
-          this.clienteService.createCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err)
-          );
-          this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
-          this.getClientes();
-          this.close();
-        }
-        else if (estado === 'Usuario Activo' && pagada === 'True'){
+            );
+            this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta sera  Desactivada por favor cancelar', 'Cerrar', {
+              duration: 10000,
+              horizontalPosition: 'center',
+              verticalPosition: 'top'
+            });
+            this.getClientes();
+            this.close();
+        } else if (estado === 'Usuario Desactivado' && pagada == false){
+          this.pago(form);
+        } else if (estado === 'Usuario Activo' && pagada == true){
           form.value.estado = 'Primer Recordatorio';
-          form.value.pagada = 'False';
+          form.value.pagada = false;
           form.value.mensaje = menp;
           tot = form.value.totalfactura;
           iva = (tot * por)/cien;
@@ -196,10 +152,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
             res => console.log(res),
             err => console.error(err),
           );
-          this.clienteService.createCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err)
-          );
           this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra Primer Recordatorio por favor cancelar', 'Cerrar', {
             duration: 10000,
             horizontalPosition: 'center',
@@ -207,7 +159,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           });
           this.getClientes();
           this.close();
-
         }
       }
     }
