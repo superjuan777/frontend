@@ -4,7 +4,7 @@ import { NgForm} from '@angular/forms'
 import { Cliente } from 'src/app/models/cliente';
 import { DialogclienteComponent } from './dialogcliente/dialogcliente.component';
 import {MatDialog} from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -22,12 +22,7 @@ export class ClienteComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getClientes();
-
-    this.suscription = this.clienteService.refresh$.subscribe(() => {
-      this.getClientes();
-    })
   }
-
 
 
   ngOnDestroy() {
@@ -57,6 +52,9 @@ export class ClienteComponent implements OnInit, OnDestroy {
       height: '89%',
       width: '65%'
     });
+    dialogRef.afterClosed().subscribe(res => {
+      this.getClientes();
+    })
   }
 
 }
