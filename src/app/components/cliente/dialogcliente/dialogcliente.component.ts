@@ -56,22 +56,30 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
      form.value.totalfactura = 0;
      form.value.iva = 0;
      form.value.subtotal = 0;
-     this.clienteService.putCliente(form.value).subscribe(
-      res => console.log(res),
-      err => console.error(err),
+       this.clienteService.putCliente(form.value).subscribe(res => {
+         if(res["Exito"] == 1){
+           this.snackBar.open('Correo electronico enviado usuario informando que su cuenta sera activada', 'Cerrar', {
+             duration: 10000,
+             horizontalPosition: 'center',
+             verticalPosition: 'top'
+           });
+           this.close();
+          } else {
+            this.snackBar.open('Sin conexion a internet verifica y vuelve a enviar correo', 'Cerrar', {
+             panelClass: ["success-dialog"],
+             duration: 10000,
+             horizontalPosition: 'center',
+             verticalPosition: 'top',
+          });
+          this.close();
+         }
+       }
      );
-     this.snackBar.open('Correo electronico enviado informando al usuario que sera Activada su cuenta', 'Cerrar', {
-      duration: 10000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top'
-     });
-     this.getClientes();
-     this.close();
     }
    }
 
 
-    addCliente(form: NgForm){
+    async addCliente(form: NgForm){
     const cero = 0;
     const cien = 100;
 
@@ -106,32 +114,47 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
         if(estado === 'Primer Recordatorio'){
           form.value.estado = 'Segundo Recordatorio';
           form.value.mensaje = mens;
-          this.clienteService.putCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err),
+          this.clienteService.putCliente(form.value).subscribe(res => {
+               if(res["Exito"] == 1){
+                 this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar', 'Cerrar', {
+                   duration: 10000,
+                   horizontalPosition: 'center',
+                   verticalPosition: 'top'
+                 });
+                 this.close();
+               } else {
+                 this.snackBar.open('Sin conexion a internet verifica y vuelve a enviar correo', 'Cerrar', {
+                  panelClass: ["success-dialog"],
+                  duration: 10000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top',
+                });
+                this.close();
+              }
+            }
           );
-          this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar', 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-          });
-          this.getClientes();
-          this.close();
-
         } else if (estado === 'Segundo Recordatorio'){
             form.value.estado = 'Usuario Desactivado';
             form.value.mensaje = mend;
-            this.clienteService.putCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err),
-            );
-            this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta sera  Desactivada por favor cancelar', 'Cerrar', {
-              duration: 10000,
-              horizontalPosition: 'center',
-              verticalPosition: 'top'
-            });
-            this.getClientes();
-            this.close();
+             this.clienteService.putCliente(form.value).subscribe(res => {
+              if(res["Exito"] == 1){
+                this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta sera Desactivada por favor cancelar', 'Cerrar', {
+                  duration: 10000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top'
+                });
+                this.close();
+              } else {
+                this.snackBar.open('Sin conexion a internet verifica y vuelve a enviar correo', 'Cerrar', {
+                  panelClass: ["success-dialog"],
+                  duration: 10000,
+                  horizontalPosition: 'center',
+                  verticalPosition: 'top',
+                });
+                this.close();
+               }
+            }
+         );
         } else if (estado === 'Usuario Desactivado' && pagada == false){
           this.pago(form);
         } else if (estado === 'Usuario Activo' && pagada == true){
@@ -148,18 +171,26 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           form.value.totalfactura = tot;
           form.value.iva = iva;
           form.value.subtotal = sub;
-          this.clienteService.putCliente(form.value).subscribe(
-            res => console.log(res),
-            err => console.error(err),
-          );
-          this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra Primer Recordatorio por favor cancelar', 'Cerrar', {
-            duration: 10000,
-            horizontalPosition: 'center',
-            verticalPosition: 'top',
-          });
-          this.getClientes();
-          this.close();
-        }
+          this.clienteService.putCliente(form.value).subscribe(res => {
+            if(res["Exito"] == 1){
+              this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar', 'Cerrar', {
+                duration: 10000,
+                horizontalPosition: 'center',
+                verticalPosition: 'top'
+              });
+              this.close();
+            } else {
+              this.snackBar.open('Sin conexion a internet verifica y vuelve a enviar correo', 'Cerrar', {
+               panelClass: ["success-dialog"],
+               duration: 10000,
+               horizontalPosition: 'center',
+               verticalPosition: 'top',
+             });
+             this.close();
+           }
+         }
+        );
+       }
       }
     }
 

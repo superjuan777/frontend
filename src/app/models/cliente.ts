@@ -15,4 +15,5 @@
     Id?: string
     mensaje: string
     por: number
+    Exito: number
 }

@@ -30,6 +30,7 @@ export class ClienteService {
     email: "",
     mensaje: "",
     por: 0,
+    Exito: 0,
   }
 
   clientes : Cliente[];
