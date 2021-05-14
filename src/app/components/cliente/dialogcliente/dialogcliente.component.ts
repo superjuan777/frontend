@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
+import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
@@ -21,8 +22,8 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
    suscription: Subscription;
 
    constructor(public dialogRef: MatDialogRef<DialogclienteComponent>,
-              public clienteService: ClienteService,
-              public snackBar: MatSnackBar) {  }
+               public clienteService: ClienteService,
+               public snackBar: MatSnackBar) {  }
 
    ngOnInit(): void {
     this.getClientes();
@@ -43,7 +44,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
     );
    }
 
-
    pago(form: NgForm){
     if(confirm('Estas seguro que la factura esta pagada')){
      form.value.fechapago = new Date();
@@ -53,8 +53,8 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
      form.value.totalfactura = 0;
      form.value.iva = 0;
      form.value.subtotal = 0;
-       this.clienteService.putCliente(form.value).subscribe(res => {
-         if(res["Exito"] == 1){
+       this.clienteService.putCliente<Cliente>(form.value).subscribe(res => {
+         if(res.Exito == 1){
            this.snackBar.open('Correo electronico enviado usuario informando que su cuenta sera activada', 'Cerrar', {
              duration: 10000,
              horizontalPosition: 'center',
@@ -74,7 +74,6 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
      );
     }
    }
-
 
     async addCliente(form: NgForm){
     const cero = 0;
@@ -111,8 +110,9 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
         if(estado === 'Primer Recordatorio'){
           form.value.estado = 'Segundo Recordatorio';
           form.value.mensaje = mens;
-          this.clienteService.putCliente(form.value).subscribe(res => {
-               if(res["Exito"] == 1){
+          this.clienteService.putCliente<Cliente>(form.value).subscribe(res => {
+            console.log(res);
+               if(res.Exito == 1){
                  this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Segundo Recordatorio por favor cancelar', 'Cerrar', {
                    duration: 10000,
                    horizontalPosition: 'center',
@@ -133,8 +133,8 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
         } else if (estado === 'Segundo Recordatorio'){
             form.value.estado = 'Usuario Desactivado';
             form.value.mensaje = mend;
-             this.clienteService.putCliente(form.value).subscribe(res => {
-              if(res["Exito"] == 1){
+             this.clienteService.putCliente<Cliente>(form.value).subscribe(res => {
+              if(res.Exito == 1){
                 this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta sera Desactivada por favor cancelar', 'Cerrar', {
                   duration: 10000,
                   horizontalPosition: 'center',
@@ -153,7 +153,32 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
             }
          );
         } else if (estado === 'Usuario Desactivado' && pagada == false){
-          this.pago(form);
+                 form.value.fechapago = new Date();
+                 form.value.estado = 'Usuario Activo';
+                 form.value.pagada = true;
+                 form.value.mensaje = " le informamos que su cuenta fue Activada"
+                 form.value.totalfactura = 0;
+                 form.value.iva = 0;
+                 form.value.subtotal = 0;
+                this.clienteService.putCliente<Cliente>(form.value).subscribe(res => {
+                 if(res.Exito == 1){
+                 this.snackBar.open('Correo electronico enviado usuario informando que su cuenta sera activada', 'Cerrar', {
+                  duration: 10000,
+                  horizontalPosition: 'center',
+                 verticalPosition: 'top'
+              });
+              this.close();
+              } else {
+               this.snackBar.open('Sin conexion a internet verifica y vuelve a enviar correo', 'Cerrar', {
+               panelClass: ["success-dialog"],
+               duration: 10000,
+               horizontalPosition: 'center',
+              verticalPosition: 'top',
+              });
+             this.close();
+            }
+           }
+         );
         } else if (estado === 'Usuario Activo' && pagada == true){
           form.value.estado = 'Primer Recordatorio';
           form.value.pagada = false;
@@ -168,8 +193,8 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
           form.value.totalfactura = tot;
           form.value.iva = iva;
           form.value.subtotal = sub;
-          this.clienteService.putCliente(form.value).subscribe(res => {
-            if(res["Exito"] == 1){
+          this.clienteService.putCliente<Cliente>(form.value).subscribe(res => {
+            if(res.Exito == 1){
               this.snackBar.open('Correo electronico enviado usuario informando el estado de su cuenta se encuentra en Primer Recordatorio por favor cancelar', 'Cerrar', {
                 duration: 10000,
                 horizontalPosition: 'center',
@@ -193,6 +218,8 @@ export class DialogclienteComponent implements OnInit, OnDestroy {
 
 
    }
+
+
    close(){
     this.dialogRef.close();
     this.getClientes();

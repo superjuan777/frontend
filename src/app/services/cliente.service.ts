@@ -38,7 +38,7 @@ export class ClienteService {
     return this.http.get<Cliente[]>(this.URL_API);
   }
 
-  putCliente(cliente: Cliente){
-    return this.http.put(`${this.URL_API}/${cliente.Id}`, cliente);
+  putCliente<type>(cliente: Cliente){
+    return this.http.put<type>(`${this.URL_API}/${cliente.Id}`, cliente);
   }
 }
